@@ -443,6 +443,36 @@
             grid-column: 1 / -1;
         }
 
+        /* ── Mobile responsive ── */
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+
+            .container { padding: 1.5rem 1.2rem; border-radius: 20px; }
+
+            .header h1 { font-size: 22px; }
+            .header p  { font-size: 13px; }
+
+            .month-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .month-button { padding: 10px 8px; font-size: 13px; }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-card-full { grid-column: 1; }
+
+            .metric-current { font-size: 32px; }
+
+            .btn { padding: 12px 10px; font-size: 14px; }
+
+            .celebrate-card { padding: 2rem 1.5rem; margin: 1rem; }
+            .celebrate-title { font-size: 22px; }
+        }
+
         /* ── Celebration overlay ── */
         .celebrate-overlay {
             position: fixed;
