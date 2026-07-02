@@ -596,7 +596,7 @@
 
     <script>
         const months = ['July', 'August', 'September', 'October', 'November', 'December'];
-        const targets = { total: 60, original: 30, communityTag: 30, promo: 4 };
+        const targets = { total: 64, original: 30, communityTag: 30, promo: 4 };
 
         let data = loadData();
         let selectedMonth = months[0];
@@ -683,7 +683,7 @@
             });
             data[selectedMonth][field] = Math.max(0, data[selectedMonth][field] + delta);
             const m = data[selectedMonth];
-            m.total = m.original + m.communityTag;
+            m.total = m.original + m.communityTag + m.promo;
             justCompletedFields = new Set();
             ['original','communityTag','promo'].forEach(f => {
                 if (!prevMet[f] && data[selectedMonth][f] >= targets[f]) justCompletedFields.add(f);
