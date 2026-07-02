@@ -743,7 +743,7 @@
             });
         }
 
-        function updateCount(field, delta) {
+        window.updateCount = function updateCount(field, delta) {
             const wasDone = isMonthComplete(selectedMonth);
             const prevMet = {};
             ['original','communityTag','promo'].forEach(f => {
