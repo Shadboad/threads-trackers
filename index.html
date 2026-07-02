@@ -679,7 +679,7 @@
             });
             data[selectedMonth][field] = Math.max(0, data[selectedMonth][field] + delta);
             const m = data[selectedMonth];
-            m.total = m.original + m.communityTag + m.promo;
+            m.total = m.original + m.communityTag;
             justCompletedFields = new Set();
             ['original','communityTag','promo'].forEach(f => {
                 if (!prevMet[f] && data[selectedMonth][f] >= targets[f]) justCompletedFields.add(f);
