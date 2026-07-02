@@ -444,33 +444,48 @@
         }
 
         /* ── Mobile responsive ── */
-        @media (max-width: 600px) {
-            body { padding: 1rem; }
+        @media (max-width: 700px) {
+            body { padding: 0.75rem; }
 
-            .container { padding: 1.5rem 1.2rem; border-radius: 20px; }
+            .container { padding: 1.2rem 1rem; border-radius: 18px; }
 
-            .header h1 { font-size: 22px; }
-            .header p  { font-size: 13px; }
+            .header h1 { font-size: 20px; }
+            .header p  { font-size: 12px; }
+            .header .emoji-crown { font-size: 30px; }
+
+            .section-title { font-size: 14px; }
 
             .month-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
+                margin-bottom: 1.5rem;
             }
 
-            .month-button { padding: 10px 8px; font-size: 13px; }
+            .month-button { padding: 10px 8px; font-size: 12px; }
+            .status-badge { font-size: 10px; padding: 3px 6px; }
 
             .metrics-grid {
                 grid-template-columns: 1fr;
+                gap: 0.8rem;
             }
 
             .metric-card-full { grid-column: 1; }
+            .metric-card { padding: 1.2rem 1rem; border-radius: 16px; }
 
-            .metric-current { font-size: 32px; }
+            .metric-label { font-size: 11px; }
+            .metric-current { font-size: 36px; }
+            .metric-target { font-size: 13px; }
+            .progress-text { font-size: 11px; }
 
-            .btn { padding: 12px 10px; font-size: 14px; }
+            .button-group { gap: 8px; }
+            .btn { padding: 13px 10px; font-size: 15px; border-radius: 12px; }
 
-            .celebrate-card { padding: 2rem 1.5rem; margin: 1rem; }
+            .requirements { padding: 1rem 1rem; }
+            .requirements li { font-size: 13px; }
+
+            .celebrate-card { padding: 2rem 1.2rem; margin: 1rem; border-radius: 20px; }
             .celebrate-title { font-size: 22px; }
+            .celebrate-sub { font-size: 13px; }
         }
 
         /* ── Celebration overlay ── */
