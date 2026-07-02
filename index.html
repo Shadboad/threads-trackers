@@ -653,10 +653,11 @@
                     </div>
                     <div class="progress-text">${progress}% complete${isMet ? ' 🌸' : ''}</div>
                     ${isMet ? `<div class="card-encourage">${getEncouragement(metric.field)}</div>` : ''}
+                    ${metric.field !== 'total' ? `
                     <div class="button-group">
                         <button class="btn btn-minus" onclick="updateCount('${metric.field}', -1)">− Remove</button>
                         <button class="btn btn-plus"  onclick="updateCount('${metric.field}',  1)">+ Add</button>
-                    </div>
+                    </div>` : ''}
                 `;
                 grid.appendChild(card);
             });
@@ -665,6 +666,8 @@
         function updateCount(field, delta) {
             const wasDone = isMonthComplete(selectedMonth);
             data[selectedMonth][field] = Math.max(0, data[selectedMonth][field] + delta);
+            const m = data[selectedMonth];
+            m.total = m.original + m.communityTag + m.promo;
             saveData();
             render();
             const nowDone = isMonthComplete(selectedMonth);
