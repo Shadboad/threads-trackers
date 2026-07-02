@@ -585,7 +585,7 @@
 
     <script>
         const months = ['July', 'August', 'September', 'October', 'November', 'December'];
-        const targets = { total: 60, original: 20, communityTag: 30, promo: 4 };
+        const targets = { total: 60, original: 30, communityTag: 30, promo: 4 };
 
         let data = loadData();
         let selectedMonth = months[0];
@@ -656,7 +656,7 @@
                     ${metric.field !== 'total' ? `
                     <div class="button-group">
                         <button class="btn btn-minus" onclick="updateCount('${metric.field}', -1)">− Remove</button>
-                        <button class="btn btn-plus"  onclick="updateCount('${metric.field}',  1)">+ Add</button>
+                        ${!isMet ? `<button class="btn btn-plus" onclick="updateCount('${metric.field}', 1)">+ Add</button>` : ''}
                     </div>` : ''}
                 `;
                 grid.appendChild(card);
