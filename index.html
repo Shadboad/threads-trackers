@@ -618,7 +618,7 @@
                 btn.innerHTML = `
                     ${month}
                     <div class="status-badge status-${status}">
-                        ${status === 'on-track' ? '✓ Complete' : '✎ In progress'}
+                        ${isMonthComplete(month) ? '✓ Complete' : '✎ In progress'}
                     </div>
                 `;
                 btn.onclick = () => { selectedMonth = month; render(); };
