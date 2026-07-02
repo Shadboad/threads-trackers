@@ -227,6 +227,7 @@
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            align-items: start;
             gap: 1.2rem;
             margin-bottom: 2rem;
         }
@@ -240,6 +241,8 @@
             backdrop-filter: blur(8px);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .metric-card::before {
