@@ -420,6 +420,18 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
+        .card-encourage {
+            font-size: 12px;
+            color: #c2185b;
+            font-weight: 600;
+            text-align: center;
+            background: rgba(255, 220, 232, 0.5);
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 1rem;
+            animation: fadeUp 0.4s ease-out;
+        }
+
         /* ── Celebration overlay ── */
         .celebrate-overlay {
             position: fixed;
@@ -640,6 +652,7 @@
                         <div class="progress-fill ${isMet ? 'complete' : ''}" style="width:${progress}%"></div>
                     </div>
                     <div class="progress-text">${progress}% complete${isMet ? ' 🌸' : ''}</div>
+                    ${isMet ? `<div class="card-encourage">${getEncouragement(metric.field)}</div>` : ''}
                     <div class="button-group">
                         <button class="btn btn-minus" onclick="updateCount('${metric.field}', -1)">− Remove</button>
                         <button class="btn btn-plus"  onclick="updateCount('${metric.field}',  1)">+ Add</button>
@@ -656,6 +669,16 @@
             render();
             const nowDone = isMonthComplete(selectedMonth);
             if (!wasDone && nowDone) celebrate(selectedMonth);
+        }
+
+        function getEncouragement(field) {
+            const messages = {
+                total:       "60 posts done! You're unstoppable 🔥",
+                original:    "Your voice is out there — keep creating! ✨",
+                communityTag:"Community queen! Keep showing up 👑",
+                promo:       "Stories done! You're promoting like a pro 💅"
+            };
+            return messages[field];
         }
 
         function isMonthComplete(month) {
