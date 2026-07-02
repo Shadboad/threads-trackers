@@ -590,13 +590,7 @@
         }
 
         function getStatus(month) {
-            const m = data[month];
-            return (
-                m.total >= targets.total &&
-                m.original >= targets.original &&
-                m.communityTag >= targets.communityTag &&
-                m.promo >= targets.promo
-            ) ? 'on-track' : 'review';
+            return data[month].total >= targets.total ? 'on-track' : 'review';
         }
 
         function renderMonthButtons() {
@@ -609,7 +603,7 @@
                 btn.innerHTML = `
                     ${month}
                     <div class="status-badge status-${status}">
-                        ${status === 'on-track' ? '✓ On track' : '✎ In progress'}
+                        ${status === 'on-track' ? '✓ Complete' : '✎ In progress'}
                     </div>
                 `;
                 btn.onclick = () => { selectedMonth = month; render(); };
@@ -662,9 +656,7 @@
         }
 
         function isMonthComplete(month) {
-            const m = data[month];
-            return m.total >= targets.total && m.original >= targets.original &&
-                   m.communityTag >= targets.communityTag && m.promo >= targets.promo;
+            return data[month].total >= targets.total;
         }
 
         function celebrate(month) {
