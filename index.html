@@ -429,6 +429,9 @@
             border-radius: 10px;
             padding: 8px 12px;
             margin-bottom: 1rem;
+        }
+
+        .card-encourage.just-completed {
             animation: fadeUp 0.4s ease-out;
         }
 
@@ -593,6 +596,7 @@
 
         let data = loadData();
         let selectedMonth = months[0];
+        let justCompletedFields = new Set();
 
         function loadData() {
             const stored = localStorage.getItem('threadsTrackerData');
@@ -656,7 +660,7 @@
                         <div class="progress-fill ${isMet ? 'complete' : ''}" style="width:${progress}%"></div>
                     </div>
                     <div class="progress-text">${progress}% complete${isMet ? ' 🌸' : ''}</div>
-                    ${isMet ? `<div class="card-encourage">${getEncouragement(metric.field)}</div>` : ''}
+                    ${isMet ? `<div class="card-encourage${justCompletedFields.has(metric.field) ? ' just-completed' : ''}">${getEncouragement(metric.field)}</div>` : ''}
                     ${metric.field !== 'total' ? `
                     <div class="button-group">
                         <button class="btn btn-minus" onclick="updateCount('${metric.field}', -1)">− Remove</button>
@@ -669,11 +673,20 @@
 
         function updateCount(field, delta) {
             const wasDone = isMonthComplete(selectedMonth);
+            const prevMet = {};
+            ['original','communityTag','promo'].forEach(f => {
+                prevMet[f] = data[selectedMonth][f] >= targets[f];
+            });
             data[selectedMonth][field] = Math.max(0, data[selectedMonth][field] + delta);
             const m = data[selectedMonth];
             m.total = m.original + m.communityTag + m.promo;
+            justCompletedFields = new Set();
+            ['original','communityTag','promo'].forEach(f => {
+                if (!prevMet[f] && data[selectedMonth][f] >= targets[f]) justCompletedFields.add(f);
+            });
             saveData();
             render();
+            justCompletedFields = new Set();
             const nowDone = isMonthComplete(selectedMonth);
             if (!wasDone && nowDone) celebrate(selectedMonth);
         }
