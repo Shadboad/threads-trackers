@@ -624,17 +624,32 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCKHW-H_AGk7AN0_1P2NqT2UK8QUaQWjrM",
+            authDomain: "threads-tracker-64482.firebaseapp.com",
+            databaseURL: "https://threads-tracker-64482-default-rtdb.firebaseio.com",
+            projectId: "threads-tracker-64482",
+            storageBucket: "threads-tracker-64482.firebasestorage.app",
+            messagingSenderId: "70141059701",
+            appId: "1:70141059701:web:99e278fee1d1e5f7f3ce3c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const dataRef = ref(db, 'trackerData');
+
         const months = ['July', 'August', 'September', 'October', 'November', 'December'];
         const targets = { total: 64, original: 30, communityTag: 30, promo: 4 };
 
-        let data = loadData();
+        let data = buildEmpty();
         let selectedMonth = months[0];
         let justCompletedFields = new Set();
 
-        function loadData() {
-            const stored = localStorage.getItem('threadsTrackerData');
-            if (stored) return JSON.parse(stored);
+        function buildEmpty() {
             const initial = {};
             months.forEach(month => {
                 initial[month] = { total: 0, original: 0, communityTag: 0, promo: 0 };
@@ -643,8 +658,16 @@
         }
 
         function saveData() {
-            localStorage.setItem('threadsTrackerData', JSON.stringify(data));
+            set(dataRef, data);
         }
+
+        // Listen for changes from any device and re-render
+        onValue(dataRef, snapshot => {
+            if (snapshot.exists()) {
+                data = snapshot.val();
+            }
+            render();
+        });
 
         function getStatus(month) {
             return data[month].total >= targets.total ? 'on-track' : 'review';
